@@ -8,7 +8,7 @@ import Logo from '../Logo/Logo';
 
 function NavBar() {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="bg-body-primary">
             <Container>
                 <Navbar.Brand as={NavLink} to="/" className="d-flex align-items-center"> <Logo /> </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
