@@ -32,13 +32,13 @@ const ItemCount = ({ stock, onAdd }) => {
     return (
         <div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' ,margin : '1vw' }}>
-            <button onClick={restar} disabled={stock === 0 || count === 1}>-</button>
+            <button className="btn btn-outline-danger" onClick={restar} disabled={stock === 0 || count === 1}>-</button>
             <h2 style={{ margin: '0 20px' }}>{count}</h2>
-            <button onClick={sumar} disabled={stock === 0 || count === stock}>+</button>
+            <button className="btn btn-outline-success" onClick={sumar} disabled={stock === 0 || count === stock}>+</button>
             
         </div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <button onClick={AgregarAlCarrito} disabled={stock === 0}>Agregar al Carrito</button>
+                <button className="btn btn-outline-primary" onClick={AgregarAlCarrito} disabled={stock === 0}>Agregar al Carrito</button>
             </div>
         </div>
     );

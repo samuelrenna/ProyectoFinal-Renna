@@ -3,6 +3,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../services/fireBase/config';
 import ItemList from '../ItemList/ItemList';
+import Loader from '../Loader/Loader'; // Importa el componente Loader
 
 const ItemListContainer = () => {
   const { pathname } = useLocation();
@@ -10,6 +11,8 @@ const ItemListContainer = () => {
 
   // Define un estado para almacenar los productos
   const [products, setProducts] = useState([]);
+  // Define un estado para indicar si se están cargando los productos
+  const [loading, setLoading] = useState(true); // Inicia como true para mostrar el Loader
 
   // Define un estado para almacenar el saludo
   const [greeting, setGreeting] = useState("");
@@ -18,6 +21,8 @@ const ItemListContainer = () => {
     // Define una función asincrónica para obtener los productos
     const fetchData = async () => {
       try {
+        setLoading(true); // Indica que se está cargando
+
         let response;
         // Si no hay una categoría en la ruta o la ruta es '/', busca todos los productos
         if (pathname === '/' || !categoryId) {
@@ -42,10 +47,13 @@ const ItemListContainer = () => {
             "Categoría no reconocida";
           setGreeting(greetingForCategory);
         }
+
         // Establece los productos obtenidos en el estado
         setProducts(response);
       } catch (error) {
         console.error('Error:', error);
+      } finally {
+        setLoading(false); // Finaliza la carga
       }
     };
 
@@ -53,11 +61,15 @@ const ItemListContainer = () => {
     fetchData();
   }, [pathname, categoryId]); // Ejecuta el efecto cuando cambia la ruta o el categoryId */
 
-  // Muestra el saludo y la lista de productos
+  // Muestra el saludo y la lista de productos, o el Loader mientras se cargan los productos
   return (
     <div>
-      <h2 style={{ textAlign: 'center', fontSize: '7vw', marginTop: '3.5vw' }}>{greeting}</h2>
-      <ItemList products={products} />
+      {loading ? <Loader /> : (
+        <>
+          <h2 style={{ textAlign: 'center', fontSize: '7vw', marginTop: '3.5vw' }}>{greeting}</h2>
+          <ItemList products={products} />
+        </>
+      )}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from "./Components/footer/Footer";
 import 'react-toastify/dist/ReactToastify.css';
 import CartProvider from './context/CartContext';
+import Checkout from './Components/Checkout/Checkout';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/:categoryId' element={<ItemListContainer />} />
             <Route path='/item/:itemId' element={<ItemDetailContainer />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/checkout' element={<Checkout />} />
             <Route path='*' element={<h2> 404 NoT FoUnD </h2>} />
           </Routes>
         </CartProvider>
